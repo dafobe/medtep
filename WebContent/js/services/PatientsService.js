@@ -51,7 +51,6 @@ function PatientsService($q, $http, PatientEntry) {
 				statusPromise : _getPatientsStatusJSON()
 				})
 		.then(function(values) {       
-			console.log(values);
 			var patients = _patients;
 			//Create Patient
 			values.patientsPromise && _setPatientEntries(values.patientsPromise.results);

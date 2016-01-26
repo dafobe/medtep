@@ -20,7 +20,6 @@ ul,ol,li {
 }
 .wrapper {
 	min-width: 320px;
-	color: #FF5701;
 }
 a:{
     text-decoration: none;
@@ -31,3 +30,21 @@ a:link{
 /* ========
     Header
 ==========*/
+.patients{
+	
+}
+.patients__list{
+	
+}
+.patient{
+	
+}
+.patient_info{
+	
+}
+.patient_status--good{
+	
+}
+.patient_status{
+	
+}

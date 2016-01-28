@@ -37,14 +37,21 @@ a:link{
 	
 }
 .patient{
-	
 }
 .patient_info{
-	
 }
 .patient_status--good{
-	
 }
 .patient_status{
 	
+}
+
+.grid{
+	
+}
+.grid-row{
+	display: flex;
+}
+.grid-row-cell{
+	flex: 1 33.3333%;
 }

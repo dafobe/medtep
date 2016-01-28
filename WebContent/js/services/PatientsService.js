@@ -10,13 +10,15 @@ function PatientsService($q, $http, PatientEntry) {
 		datasource = 'https://demo3417391.mockable.io';
 		
 	var _setPatientEntries = function(patientsJSON){
+		var patients = [];
+		
 		if(Array.isArray(patientsJSON)){
-			_patients = patientsJSON.map(function(patientObj){
+			patients = patientsJSON.map(function(patientObj){
 				return new PatientEntry(patientObj.id, patientObj.name, patientObj.surname)
 			});
 		}
 		
-		return _patients;
+		return patients;
 	}
 	var _getPatientsStatusJSON = function(){
 		var deferred = $q.defer();
@@ -44,33 +46,35 @@ function PatientsService($q, $http, PatientEntry) {
 		
 		return deferred.promise;
 	}
-	
-	var _getPatients = function(){
-		$q.all({
-				patientsPromise : _getPatientsJSON(),
-				statusPromise : _getPatientsStatusJSON()
-				})
-		.then(function(values) {       
-			var patients = _patients;
-			//Create Patient
-			values.patientsPromise && _setPatientEntries(values.patientsPromise.results);
-			//Add status to patients
-			values.statusPromise && values.statusPromise.results.forEach(function(status){
-				var patient = _patients.filter(function(patient){
-					return patient.id === status.patient
-				});
-				
-				patient.length && patient.forEach(function(patientEntry){
-					patientEntry.setStatus(status.status);
-				})
-			})
+	var _updatePatients = function(values) {       
+		var patients = [];
+		//Create Patient
+		patients = _setPatientEntries(values.patientsPromise.results);
+		//Add status to patients
+		values.statusPromise && values.statusPromise.results.forEach(function(status){
+			var patient = patients.filter(function(patient){
+				return patient.id === status.patient
+			});
 			
-			console.log(_patients);
-			return _patients;
-		});
+			patient.length && patient.forEach(function(patientEntry){
+				patientEntry.setStatus(status.status);
+			})
+		})
+		return patients;
+	}
+	var _getPatients = function(){
+		var finalPromise = $q.all({
+								patientsPromise : _getPatientsJSON(),
+								statusPromise : _getPatientsStatusJSON()
+								}); 
+		
+		finalPromise.then();
+		console.log(_patients);
+		return finalPromise;
 	}
 	//Public API
 	return {
-		getPatients : _getPatients
+		getPatients: _getPatients,
+		updatePatients: _updatePatients
 	};
 }

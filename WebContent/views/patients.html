@@ -1,41 +1,28 @@
 <div  class="patients">
 	<header>
 	</header>
-	<section class="patients__list">
-<!-- 		<article data-ng-show="!gallery.allGames.length"> -->
-<!-- 			Seems there aren't patiens. -->
-<!-- 		</article> -->
-		<header>
-			<div>
+	<section class="patients__list grid">
+		<header class="grid-row">
+			<div class="grid-row-cell" data-ng-click="patients.updateSorting('name')">
 				First name
 			</div>
-			<div>
+			<div class="grid-row-cell" data-ng-click="patients.updateSorting('lastName')">
 				Last name
 			</div>
-			<div>
+			<div class="grid-row-cell" data-ng-click="patients.updateSorting('status')">
 				Status
 			</div>
 		</header>
-		<article class="patient">
-			<div class="patient_info">
-				Peter
+		
+		<article class="patient grid-row" ng-repeat="patient in patients.patients | orderBy:patients.sortField">
+			<div class="patient_info grid-row-cell">
+				{{patient.name}}
 			</div>
-			<div class="patient_info">
-				Parker
+			<div class="patient_info grid-row-cell">
+				{{patient.lastName}}
 			</div>
-			<div class="patient_status--good">
-				Good
-			</div>
-		</article>
-		<article class="patient">
-			<div class="patient_info">
-				Peter2
-			</div>
-			<div class="patient_info">
-				Parker2
-			</div>
-			<div class="patient_status">
-				Unknown
+			<div class="patient_status--good grid-row-cell">
+				{{patient.status}}
 			</div>
 		</article>
 	</section>

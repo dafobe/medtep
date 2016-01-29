@@ -20,7 +20,6 @@
     	  	  currentSortingIsDesc = false,
 	  		  sortByIndex,
 	  		  sortField;
-    	  console.log('sort in:', sorting);
     	  
     	  currentSorting = sorting.filter(function(field, index){
     		  var regex = new RegExp('^-?'+sortField, 'g'),
@@ -42,8 +41,6 @@
     	  (typeof sortByIndex != 'undefined') && sorting.splice(sortByIndex, 1);
     	  
     	  sorting.splice(0,0,(currentSortingIsDesc)?sortField:'-'+sortField);
-    	      	  
-    	  console.log('sort out:', sorting);
       }
 }
  

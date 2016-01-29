@@ -38,10 +38,8 @@ header{
 	padding-bottom: 15px;
 }
 .patients{
-	
 }
 .patients__list{
-	
 }
 .patient{
 }
@@ -52,7 +50,6 @@ header{
 .patient_status{
 	
 }
-
 .grid{
 	
 }
@@ -61,4 +58,18 @@ header{
 }
 .grid-row-cell{
 	flex: 1 33.3333%;
+}
+/* ------- Desktop -------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+  
+}
+/* ------- Tablet -------- */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1280px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+
 }

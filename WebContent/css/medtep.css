@@ -30,6 +30,13 @@ a:link{
 /* ========
     Header
 ==========*/
+header{
+	background: #656565;
+	color: white;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-bottom: 15px;
+}
 .patients{
 	
 }

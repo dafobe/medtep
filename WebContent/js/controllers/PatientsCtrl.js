@@ -9,7 +9,7 @@
   		  patients = [];
       
       this.patients = patients,
-      this.sortField = ['name','lastName','status'];
+      this.sortField = ['name'];
       
       PatientsService.getPatients().then(function(values){
     	  		ctrl.patients = PatientsService.updatePatients(values)});
@@ -29,12 +29,19 @@
     		  if(field.match(regex)){
     			  sortByIndex = index;
     			  currentSortingIsDesc = field.match(regexIsDesc);
+    			  return true;
     		  }
+    	  });
+    	  
+    	  //Reset Sorting 
+    	  sorting.forEach(function(field){
+    		  var regexIsDesc = new RegExp('^-');
+    		  field.replace(regexIsDesc,'');
     	  });
 	  	
     	  (typeof sortByIndex != 'undefined') && sorting.splice(sortByIndex, 1);
     	  
-    	  sorting.splice(0,0,currentSortingIsDesc?sortField:'-'+sortField);
+    	  sorting.splice(0,0,(currentSortingIsDesc)?sortField:'-'+sortField);
     	      	  
     	  console.log('sort out:', sorting);
       }

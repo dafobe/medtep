@@ -3,16 +3,29 @@
  * Manage patients screen 
  */
 
- function PatientsCtrl (PatientsService) {
+ function PatientsCtrl ($filter, PatientsService) {
       'use strict';
       var ctrl = this, 
-  		  patients = [];
+  		  patients = [],
+  		  fullNameFilter = $filter('filterByFields')('name','lastName'),
+  		  statusFilter = $filter('filterByFields')('status');
       
-      this.patients = patients,
+      this.patients = patients;
+      this.filteredPatients = patients;
       this.sortField = ['name'];
+      this.fullNameFilter = '';
+      this.statusFilter = '';
+
       
       PatientsService.getPatients().then(function(values){
-    	  		ctrl.patients = PatientsService.updatePatients(values)});
+    	  		ctrl.patients = PatientsService.updatePatients(values);
+    	  		ctrl.filteredPatients = ctrl.patients;
+      });
+      
+      this.filterPatients = function(){
+    	  var filteredList = fullNameFilter(this.fullNameFilter, this.patients);
+    	  this.filteredPatients = statusFilter(this.statusFilter, filteredList);
+      }
       
       this.updateSorting = function(sortField){
     	  var sorting = this.sortField,

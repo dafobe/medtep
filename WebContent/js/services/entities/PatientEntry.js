@@ -8,14 +8,28 @@ function Patient() {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
-		this.status = status;
+		this.status = status || 'unknown';
 	}
 
 	PatientEntry.prototype.setStatus = function (status){
-		this.status = status;
+		status && (this.status = status);
 		
 		return this;
 	}
+	
+	PatientEntry.prototype.hasName = function (){
+		return this.name?true:false;
+	}
+	
+	PatientEntry.prototype.hasLastName = function (){
+		return this.lastName?true:false;
+	}
+	
+	PatientEntry.prototype.hasStatus = function (){
+		return this.status?true:false;
+	}
+	
+	
 	
 	return (PatientEntry);
 }

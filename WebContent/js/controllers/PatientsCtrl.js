@@ -16,15 +16,25 @@
       
       this.updateSorting = function(sortField){
     	  var sorting = this.sortField,
+    	  	  currentSorting,
+    	  	  currentSortingIsDesc = false,
 	  		  sortByIndex,
 	  		  sortField;
     	  console.log('sort in:', sorting);
-    	 
-    	  sortByIndex = sorting.indexOf(sortField);
-	  		  
-    	  (sortByIndex > -1) && sorting.splice(sortByIndex, 1);
     	  
-    	  sorting.splice(0,0,sortField);
+    	  currentSorting = sorting.filter(function(field, index){
+    		  var regex = new RegExp('^-?'+sortField, 'g'),
+    		  	  regexIsDesc = new RegExp('^-');
+    		  
+    		  if(field.match(regex)){
+    			  sortByIndex = index;
+    			  currentSortingIsDesc = field.match(regexIsDesc);
+    		  }
+    	  });
+	  	
+    	  (typeof sortByIndex != 'undefined') && sorting.splice(sortByIndex, 1);
+    	  
+    	  sorting.splice(0,0,currentSortingIsDesc?sortField:'-'+sortField);
     	      	  
     	  console.log('sort out:', sorting);
       }
